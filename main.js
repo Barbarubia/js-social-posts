@@ -154,6 +154,11 @@ function postGenerator(i) {
     eleLikeButton.innerHTML = `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
     <span class="like-button__label">Mi Piace</span>`;
     elePostLikesCta.append(eleLikeButton);
+
+
+    eleLikeButton.addEventListener('click', applyLike);
+    
+    
     // Contatore Mi Piace
     let elePostLikesCounter = document.createElement('div');
     elePostLikesCounter.classList.add('likes__counter');
@@ -200,4 +205,11 @@ let arrItalianDateFormat = [];
     };
 // console.log(arrItalianDateFormat);
 return arrItalianDateFormat;
+}
+
+
+
+// Funzione per applicare il like
+function applyLike() { 
+    this.classList.toggle('like-button--liked');
 }
