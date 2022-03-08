@@ -110,7 +110,7 @@ function postGenerator(i) {
     if (posts[i].author.image == null) {
         let eleProfilePic = document.createElement('div');
         eleProfilePic.classList.add('profile-pic', 'profile-pic-default');
-        eleProfilePic.innerHTML = 'DD'; // TODO: prendere le iniziali del nome
+        eleProfilePic.innerHTML = `${InitialsNameAuthor()[i]}`;
         elePostMetaIcon.append(eleProfilePic);
     } else {
         elePostMetaIcon.innerHTML = `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
@@ -159,24 +159,6 @@ function postGenerator(i) {
     elePostLikesCounter.classList.add('likes__counter');
     elePostLikesCounter.innerHTML = ` Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone`;
     elePostLikes.append(elePostLikesCounter);
-    
-
-
-
-    // elePostFooter.innerHTML = `
-    //                 <div class="likes js-likes">
-    //                     <div class="likes__cta">
-    //                         <a class="like-button  js-like-button" href="#" data-postid="1">
-    //                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-    //                             <span class="like-button__label">Mi Piace</span>
-    //                         </a>
-    //                     </div>
-    //                     <div class="likes__counter">
-    //                         Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
-    //                     </div>
-    //                 </div> 
-    //                 `;
-
 }
 
 
@@ -186,4 +168,19 @@ function allPostsGenerator() {
     for (let i = 0; i <= posts.length - 1; i++) {
         postGenerator(i);
     }
+}
+
+
+
+// Definizione della funzione che genera un array con le iniziali degli autori dei post
+function InitialsNameAuthor() {
+
+arrInitials = []
+    for (let i = 0; i < posts.length; i++) {
+    let arrNameSurname = posts[i].author.name.split(' ');
+    Initials = arrNameSurname[0][0] + arrNameSurname[1][0];
+    arrInitials.push(Initials);
+    };
+// console.log(arrInitials);
+return arrInitials;
 }
