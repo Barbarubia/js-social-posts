@@ -150,9 +150,10 @@ function postGenerator(i) {
     let eleLikeButton = document.createElement('a');
     eleLikeButton.classList.add('like-button', 'js-like-button');
     eleLikeButton.href = '#';
-    // eleLikeButton.data-postid = `${posts[i].id}`;
+    // eleLikeButton.dataset = `postid: ${posts[i].id}`;
     eleLikeButton.innerHTML = `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
     <span class="like-button__label">Mi Piace</span>`;
+    eleLikeButton.addEventListener('click', applyLike(i));
     elePostLikesCta.append(eleLikeButton);
     // Contatore Mi Piace
     let elePostLikesCounter = document.createElement('div');
@@ -189,11 +190,9 @@ function allPostsGenerator() {
 }
 
 
-
-// Definizione della funzione che applica il like al post
 function applyLike(i) {
-    let postLikes = posts[i].likes;
-    for (let i = 0; i <= posts.length - 1; i++) {
-        postLikes++;
+    for (let i = 0; i < posts.length; i++); {
+    (posts[i].likes)++;
     }
 }
+// FIXME: aumentano di 1 tutti i post
