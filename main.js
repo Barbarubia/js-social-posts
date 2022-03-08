@@ -84,7 +84,9 @@ const posts = [
 // Definizione elemento contenitore dei post
 const eleContainer = document.getElementById('container');
 
-// Esecuzione funzione che genera la visualizzazione dei post
+
+
+// Esecuzione della funzione che genera la visualizzazione dei post
 allPostsGenerator();
 
 
@@ -137,20 +139,44 @@ function postGenerator(i) {
     // generazione footer del post
     let elePostFooter = document.createElement('div');
     elePostFooter.classList.add('post__footer');
-    elePostFooter.innerHTML = `
-                    <div class="likes js-likes">
-                        <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
-                                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                                <span class="like-button__label">Mi Piace</span>
-                            </a>
-                        </div>
-                        <div class="likes__counter">
-                            Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
-                        </div>
-                    </div> 
-                    `;
     elePost.append(elePostFooter);
+    let elePostLikes = document.createElement('div');
+    // Bottone Mi Piace
+    elePostLikes.classList.add('likes', 'js-likes');
+    elePostFooter.append(elePostLikes);
+    let elePostLikesCta = document.createElement('div');
+    elePostLikesCta.classList.add('likes__cta');
+    elePostLikes.append(elePostLikesCta);
+    let eleLikeButton = document.createElement('a');
+    eleLikeButton.classList.add('like-button', 'js-like-button');
+    eleLikeButton.href = '#';
+    // eleLikeButton.data-postid = `${posts[i].id}`;
+    eleLikeButton.innerHTML = `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+    <span class="like-button__label">Mi Piace</span>`;
+    elePostLikesCta.append(eleLikeButton);
+    // Contatore Mi Piace
+    let elePostLikesCounter = document.createElement('div');
+    elePostLikesCounter.classList.add('likes__counter');
+    elePostLikesCounter.innerHTML = ` Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone`;
+    elePostLikes.append(elePostLikesCounter);
+    
+
+
+
+    // elePostFooter.innerHTML = `
+    //                 <div class="likes js-likes">
+    //                     <div class="likes__cta">
+    //                         <a class="like-button  js-like-button" href="#" data-postid="1">
+    //                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+    //                             <span class="like-button__label">Mi Piace</span>
+    //                         </a>
+    //                     </div>
+    //                     <div class="likes__counter">
+    //                         Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+    //                     </div>
+    //                 </div> 
+    //                 `;
+
 }
 
 
@@ -159,5 +185,15 @@ function postGenerator(i) {
 function allPostsGenerator() {
     for (let i = 0; i <= posts.length - 1; i++) {
         postGenerator(i);
+    }
+}
+
+
+
+// Definizione della funzione che applica il like al post
+function applyLike(i) {
+    let postLikes = posts[i].likes;
+    for (let i = 0; i <= posts.length - 1; i++) {
+        postLikes++;
     }
 }
