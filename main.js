@@ -85,12 +85,12 @@ const posts = [
 const eleContainer = document.getElementById('container');
 
 // Esecuzione funzione che genera la visualizzazione dei post
-postGenerator();
+allPostsGenerator();
 
 
 
 // Definizione della funzione che genera la visualizzazione dei post
-function postGenerator() {
+function postGenerator(i) {
     // generazione dell'elemento post
     let elePost = document.createElement('div');
     elePost.classList.add('post');
@@ -98,28 +98,40 @@ function postGenerator() {
     // generazione header del post
     let elePostHeader = document.createElement('div');
     elePostHeader.classList.add('post__header');
-    elePostHeader.innerHTML = `
-                    <div class="post-meta">                    
-                        <div class="post-meta__icon">
-                            <img class="profile-pic" src="${posts[0].author.image}" alt="${posts[0].author.name}">                    
-                        </div>
-                        <div class="post-meta__data">
-                            <div class="post-meta__author">${posts[0].author.name}</div>
-                            <div class="post-meta__time">4 mesi fa</div>
-                        </div>                    
-                    </div>
-                    `;
     elePost.append(elePostHeader);
+    let elePostMeta = document.createElement('div');
+    elePostMeta.classList.add('post-meta');
+    elePostHeader.append(elePostMeta);
+    // immagine dell'autore
+    let elePostMetaIcon = document.createElement('div');
+    elePostMetaIcon.classList.add('post-meta__icon');
+    if (posts[i].author.image == null) {
+        let eleProfilePic = document.createElement('div');
+        eleProfilePic.classList.add('profile-pic', 'profile-pic-default');
+        eleProfilePic.innerHTML = 'DD'; // TODO: prendere le iniziali del nome
+        elePostMetaIcon.append(eleProfilePic);
+    } else {
+        elePostMetaIcon.innerHTML = `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
+    }
+    elePostMeta.append(elePostMetaIcon);
+    // nome dell'autore e data pubblicazione
+    let elePostMetaData = document.createElement('div');
+    elePostMetaData.classList.add('post-meta__data');
+    elePostMetaData.innerHTML = `
+                    <div class="post-meta__author">${posts[i].author.name}</div>
+                    <div class="post-meta__time">${posts[i].created}</div>
+                    `;
+    elePostMeta.append(elePostMetaData);
     // generazione contenuto del post
     let elePostContent = document.createElement('div');
     elePostContent.classList.add('post__text');
-    elePostContent.innerHTML = `${posts[0].content}`;
+    elePostContent.innerHTML = `${posts[i].content}`;
     elePost.append(elePostContent);
     // Generazione, SE PRESENTE, dell'immagine del post
-    if (posts[0].media != null) {
+    if (posts[i].media != '') {
         let elePostImage = document.createElement('div');
         elePostImage.classList.add('post__image');
-        elePostImage.innerHTML = `<img src="https://unsplash.it/600/300?image=171" alt="">`;
+        elePostImage.innerHTML = `<img src="${posts[i].media}" alt="">`;
         elePost.append(elePostImage);
     }
     // generazione footer del post
@@ -134,9 +146,18 @@ function postGenerator() {
                             </a>
                         </div>
                         <div class="likes__counter">
-                            Piace a <b id="like-counter-1" class="js-likes-counter">${posts[0].likes}</b> persone
+                            Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
                         </div>
                     </div> 
                     `;
     elePost.append(elePostFooter);
+}
+
+
+
+// Definzione della funzione che genera tutti i post contenuti nell'array
+function allPostsGenerator() {
+    for (let i = 0; i <= posts.length - 1; i++) {
+        postGenerator(i);
+    }
 }
