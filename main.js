@@ -121,7 +121,7 @@ function postGenerator(i) {
     elePostMetaData.classList.add('post-meta__data');
     elePostMetaData.innerHTML = `
                     <div class="post-meta__author">${posts[i].author.name}</div>
-                    <div class="post-meta__time">${posts[i].created}</div>
+                    <div class="post-meta__time">${transformDateFormat()[i]}</div>
                     `;
     elePostMeta.append(elePostMetaData);
     // generazione contenuto del post
@@ -175,12 +175,29 @@ function allPostsGenerator() {
 // Definizione della funzione che genera un array con le iniziali degli autori dei post
 function InitialsNameAuthor() {
 
-arrInitials = []
+let arrInitials = [];
     for (let i = 0; i < posts.length; i++) {
-    let arrNameSurname = posts[i].author.name.split(' ');
-    Initials = arrNameSurname[0][0] + arrNameSurname[1][0];
-    arrInitials.push(Initials);
+        let arrNameSurname = posts[i].author.name.split(' ');
+        let Initials = arrNameSurname[0][0] + arrNameSurname[1][0];
+        arrInitials.push(Initials);
     };
 // console.log(arrInitials);
 return arrInitials;
+}
+
+
+
+// Funzione che converte la data dal formato YYYY-MM-DD al formato DD-MM-YYYY
+function transformDateFormat() {
+
+let arrItalianDateFormat = [];
+    for (let i = 0; i < posts.length; i++) {
+        let arrYyyyMmDd = posts[i].created.split('-');
+        // console.log(arrYyyyMmDd);
+        let italianDateFormat = arrYyyyMmDd[2] + '-' + arrYyyyMmDd[1] + '-' + arrYyyyMmDd[0]
+        // console.log(italianDateFormat);
+        arrItalianDateFormat.push(italianDateFormat);
+    };
+// console.log(arrItalianDateFormat);
+return arrItalianDateFormat;
 }
