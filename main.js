@@ -154,15 +154,11 @@ function postGenerator(i) {
     eleLikeButton.innerHTML = `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
     <span class="like-button__label">Mi Piace</span>`;
     elePostLikesCta.append(eleLikeButton);
-
-
-    eleLikeButton.addEventListener('click', applyLike);
-    
-    
+    eleLikeButton.addEventListener('click', addRemoveLike);
     // Contatore Mi Piace
     let elePostLikesCounter = document.createElement('div');
     elePostLikesCounter.classList.add('likes__counter');
-    elePostLikesCounter.innerHTML = ` Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone`;
+    elePostLikesCounter.innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone`;
     elePostLikes.append(elePostLikesCounter);
 }
 
@@ -209,7 +205,18 @@ return arrItalianDateFormat;
 
 
 
-// Funzione per applicare il like
-function applyLike() { 
-    this.classList.toggle('like-button--liked');
+// Funzione per applicare e rimuovere il like
+function addRemoveLike() {
+let likesCounter = parseInt(this.parentNode.parentNode.parentNode.querySelector('.js-likes-counter').textContent);
+const arrIDwithLike = [];
+
+    if (!this.classList.contains('like-button--liked')) {
+    this.classList.add('like-button--liked');
+    likesCounter++;
+    this.parentNode.parentNode.parentNode.querySelector('.likes__counter').innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${likesCounter}</b> persone`;
+    } else {
+    this.classList.remove('like-button--liked');
+    likesCounter--;
+    this.parentNode.parentNode.parentNode.querySelector('.likes__counter').innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${likesCounter}</b> persone`;
+    }
 }
