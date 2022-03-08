@@ -149,7 +149,7 @@ function postGenerator(i) {
     elePostLikes.append(elePostLikesCta);
     let eleLikeButton = document.createElement('a');
     eleLikeButton.classList.add('like-button', 'js-like-button');
-    eleLikeButton.href = '#';
+    eleLikeButton.href = '#!';
     eleLikeButton.dataset.postid = posts[i].id;
     eleLikeButton.innerHTML = `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
     <span class="like-button__label">Mi Piace</span>`;
