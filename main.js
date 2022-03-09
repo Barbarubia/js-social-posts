@@ -110,7 +110,7 @@ function postGenerator(i) {
     if (posts[i].author.image == null) {
         let eleProfilePic = document.createElement('div');
         eleProfilePic.classList.add('profile-pic', 'profile-pic-default');
-        eleProfilePic.innerHTML = `${InitialsNameAuthor()[i]}`;
+        eleProfilePic.innerHTML = `<span>${InitialsNameAuthor()[i]}</span>`;
         elePostMetaIcon.append(eleProfilePic);
     } else {
         elePostMetaIcon.innerHTML = `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
