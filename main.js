@@ -195,7 +195,7 @@ let arrItalianDateFormat = [];
     for (let i = 0; i < posts.length; i++) {
         let arrYyyyMmDd = posts[i].created.split('-');
         // console.log(arrYyyyMmDd);
-        let italianDateFormat = arrYyyyMmDd[2] + '-' + arrYyyyMmDd[1] + '-' + arrYyyyMmDd[0]
+        let italianDateFormat = arrYyyyMmDd[2] + '/' + arrYyyyMmDd[1] + '/' + arrYyyyMmDd[0]
         // console.log(italianDateFormat);
         arrItalianDateFormat.push(italianDateFormat);
     };
